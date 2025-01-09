@@ -7,7 +7,6 @@ const port = 3000
 
 app.use(express.json()); 
 app.use(bodyParser.json());
-
 function klick() {
   console.log("clicked");
   
@@ -44,5 +43,5 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "admin",
   password: "password",
-  database: "F21"
+  database: "utlån"
 });
