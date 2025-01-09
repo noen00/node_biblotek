@@ -1,0 +1,46 @@
+{
+
+  "name": "apitest",
+
+  "version": "1.0.0",
+
+  "description": "testing",
+
+  "main": "(index.js)",
+
+  "scripts": {
+
+    "test": "let e = 1"
+
+  },
+
+  "repository": {
+
+    "type": "git",
+
+    "url": "git"
+
+  },
+
+  "keywords": [
+
+    "keywords"
+
+  ],
+
+  "author": "kjetil",
+
+  "license": "ISC",
+
+  "dependencies": {
+
+    "express": "^4.21.2",
+
+    "mysql": "^2.18.1",
+
+    "node-fetch": "^3.3.2"
+
+  }
+
+}
+
