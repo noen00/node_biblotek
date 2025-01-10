@@ -6,7 +6,7 @@
 
   "description": "testing",
 
-  "main": "(index.js)",
+  "main": "(index.mjs)",
 
   "scripts": {
 

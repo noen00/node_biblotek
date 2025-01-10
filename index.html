@@ -7,31 +7,17 @@
 </head>
 <body>
     <h1>Click the button to create a table</h1>
-    <button id="create-table">Create Table</button>
-    <textarea name="" id="booknavn"></textarea>
+    <button onclick=testa() id="create-table">Create Table</button>
+    <form>
+        <input id="booknavn" type="text">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-     $(document).ready(function() {
-        $('#create-table').click(function(e) {
-            var bookName = $('#booknavn').val();
-            console.log(bookName);
-            e.preventDefault();
-            $.ajax({
-                url: '/create-table',
-                type: 'POST',
-                data: { bookName: bookName },
-                success: function(response) {
-                    console.log('Table creation initiated');
-                    alert('Table creation initiated');
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error creating table:', xhr.responseText);
-                    alert('Error creating table: ' + xhr.responseText);
-                }
-            });
-        });
-    });
+
+    </form>
+
+    <script type="module">
+
     </script>
+    <script src="import.js"></script>
+    
 </body>
 </html>
