@@ -1,29 +1,38 @@
-const express = require('express')
-const path = require('path');
-var mysql = require('mysql');
+import { createRequire } from 'module';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const require = createRequire(import.meta.url);
+const express = require('express');
+//const commonjs= require('commonjs')
+const mysql = require('mysql');
 const bodyParser = require('body-parser');
-const app = express()
-import test from './import.mjs'
-app.use(bodyParser.json())
-if (test=true){
-  klick()
+
+const app = express();
+
+import { test } from './import.mjs';
+
+app.use(bodyParser.json());
+
+if (test) {
+  klick();
 }
-var con = mysql.createConnection({
+
+const con = mysql.createConnection({
   host: "localhost",
   user: "admin",
   password: "password", 
   database: "utlån"
 });
 
-function klick() {
-  console.log("test")
-  var sql = `CREATE TABLE test (name VARCHAR(255), address VARCHAR(255))`
+function klick(bok) {
+  console.log("test");
+  var sql = `CREATE TABLE test (name VARCHAR(255), address VARCHAR(255))`;
   con.query(sql, function (err, result) {
     if (err) {
       console.error('Error creating table:', err);
       return;
     }
-    console.log(`Table ${name} created`);
+    console.log(`Table ${bok} created`);
   });
 }
 
@@ -34,6 +43,8 @@ app.post('/create-table', (req, res) => {
   
   klick(bok);
 });
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));

@@ -1,48 +1,27 @@
 {
-
   "name": "apitest",
-
   "version": "1.0.0",
-
   "description": "testing",
-
   "main": "(index.mjs)",
-
   "scripts": {
-
-    "test": "let e = 1"
-
+    "test": "node index.mjs"
   },
-
   "repository": {
-
     "type": "git",
-
     "url": "git"
-
   },
-
   "keywords": [
-
     "keywords"
-
   ],
-
   "author": "kjetil",
-
   "license": "ISC",
-
   "dependencies": {
-
+    "body-parser": "^1.20.3",
+    "commonjs": "^0.0.1",
     "esm": "^3.2.25",
-
     "express": "^4.21.2",
-
     "mysql": "^2.18.1",
-
     "node-fetch": "^3.3.2"
-
-  }
-
+  },
+  "devDependencies": {}
 }
-
