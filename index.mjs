@@ -3,7 +3,7 @@ const path = require('path');
 var mysql = require('mysql');
 const bodyParser = require('body-parser');
 const app = express()
-import test from './index.html'
+import test from './import.mjs'
 app.use(bodyParser.json())
 if (test=true){
   klick()

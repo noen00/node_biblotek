@@ -8,6 +8,3 @@ test=true
 }
 
 export { test } 
-
-
-<script src="index.mjs"></script>
