@@ -21,7 +21,8 @@
     "esm": "^3.2.25",
     "express": "^4.21.2",
     "mysql": "^2.18.1",
-    "node-fetch": "^3.3.2"
-  },
-  "devDependencies": {}
+    "node": "^22.13.0",
+    "node-fetch": "^3.3.2",
+    "node.js": "^0.0.1-security"
+  }
 }
