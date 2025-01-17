@@ -71,10 +71,26 @@ function generateAccessToken(username, password) {
 app.get('/brukere', (req, res) => {
   var brukernavn = req.headers['brukernavn'];
   var passord = req.headers['passord'];
+  con.connect(function(err) {
+    con.query("SELECT * FROM brukerer WHERE brukernan = ${brukernavn}", function(err, result, field){
+      if(result.length === 0){
+         console.log("no") 
+      } else {  
+        con.query("SELECT * FROM brukerer WHERE passord = ${passord}", function(err, result, field){
+          if(result.length === 0){
+              console.log("Does not exist");
+          } else {  
+            token = generateAccessToken(brukernavn, passord);
+            res.json(token);     
+          }
+      });
 
-  token = generateAccessToken(brukernavn, passord);
-  res.json(token);
-})
+      }
+  })});
+
+  })
+
+
 
 app.post('/api/klick', async (req, res) => {
 
