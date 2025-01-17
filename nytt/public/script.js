@@ -29,5 +29,6 @@ document.getElementById('login').addEventListener('click', async () => {
     .then(response => {return response.json()})
     .then(token => {
         localStorage.setItem('token', token)
+        
     })
 });

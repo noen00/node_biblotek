@@ -25,12 +25,7 @@ app.get('/', (req, res) => {
 function klick() {
     con.connect(function(err) {
         if (err) throw err;
-        console.log("Connected!");
-        var sql = "CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))";
-        con.query(sql, function (err, result) {
-          if (err) throw err;
-          console.log("Table created");
-        });
+       
       });
   };
 
@@ -71,26 +66,26 @@ function generateAccessToken(username, password) {
 app.get('/brukere', (req, res) => {
   var brukernavn = req.headers['brukernavn'];
   var passord = req.headers['passord'];
-  con.connect(function(err) {
-    con.query("SELECT * FROM brukerer WHERE brukernan = ${brukernavn}", function(err, result, field){
-      if(result.length === 0){
-         console.log("no") 
-      } else {  
-        con.query("SELECT * FROM brukerer WHERE passord = ${passord}", function(err, result, field){
-          if(result.length === 0){
-              console.log("Does not exist");
-          } else {  
-            token = generateAccessToken(brukernavn, passord);
-            res.json(token);     
-          }
-      });
-
+  const query = 'SELECT * FROM brukere WHERE brukernavn = ? AND passord = ?';
+    
+  con.query(query, [brukernavn, passord], (err, result) => {
+      if (err) {
+          console.error('Error:', err);
+          res.status(500).send('Database error');
+      } else if (result.length > 0) {
+        token = generateAccessToken(brukernavn, passord);
+        res.json(token);
+      } else {
+          res.status(404).send('User not found');
       }
-  })});
-
-  })
+  });
 
 
+
+  
+
+
+})
 
 app.post('/api/klick', async (req, res) => {
 
