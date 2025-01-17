@@ -3,18 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Button Example</title>
-    <link rel="icon" type="image"  href="coconut.png">
+    <title>MySQL Table Creator</title>
+    <link rel="icon" type="image/png" href="coconut.png">
 </head>
 <body>
     <h1>Click the button to create a table</h1>
-    <button onclick=testa() id="create-table">Create Table</button>
-    <form>
-        <input id="booknavn" type="text">
+    <input id="booknavn" type="text">
+    <button id="create-table">Create Table</button>
 
+    <script src="/public/impoor.js"></script>
 
-    </form>
-    <script src="import.mjs"></script>
-    
+    <script>
+        document.getElementById('create-table').addEventListener('click', function() {
+            const bookName = document.getElementById('booknavn').value;
+            
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ bookName }),
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch((error) => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>

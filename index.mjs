@@ -1,56 +1,42 @@
-import { createRequire } from 'module';
-import path from 'path';
-import { fileURLToPath } from 'url';
-const require = createRequire(import.meta.url);
+// dist/src/index.js
+const { app } = require('./dist/src/index');
+app.listen(3000);
 const express = require('express');
-//const commonjs= require('commonjs')
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
-const app = express();
 
-import { test } from './import.mjs';
+app.use(cors());
 
+app.use(express.static('public'));
 app.use(bodyParser.json());
 
-if (test) {
-  klick();
-}
-
-const con = mysql.createConnection({
-  host: "localhost",
-  user: "admin",
-  password: "password", 
-  database: "utlån"
-});
-
 function klick(bok) {
-  console.log("test");
-  var sql = `CREATE TABLE test (name VARCHAR(255), address VARCHAR(255))`;
-  con.query(sql, function (err, result) {
-    if (err) {
-      console.error('Error creating table:', err);
-      return;
-    }
-    console.log(`Table ${bok} created`);
-  });
+    console.log("test");
+    var sql = `CREATE TABLE ${bok} (name VARCHAR(255), address VARCHAR(255))`;
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.error('Error creating table:', err);
+            return;
+        }
+        console.log(`Table ${bok} created`);
+    });
 }
 
-app.post('/create-table', (req, res) => {
-  let { bookName } = req.body;
-  let bok = req.body.booknavn;
-  console.log(`Creating table ${bok}`);
-  
-  klick(bok);
-});
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+// Add your routes here
+app.post('/', (req, res) => {
+    const { bookName } = req.body;
+    let bok = bookName;
+    klick(bok);
+    res.send(`Table ${bok} created`);
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:3000`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
+
+// Export app as module
+module.exports = { app };
+
