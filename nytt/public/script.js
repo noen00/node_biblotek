@@ -2,12 +2,14 @@ document.getElementById('createButton').addEventListener('click', async () => {
     try {
         const boknav = document.getElementById('boknav').value;
         console.log(boknav);
+        const token = localStorage.getItem('token')
 
         fetch('/api/klick', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'boknav': boknav
+                'boknav': boknav,
+                'authorization': `${token}`
             },
         })
 		.then(response => response.json)
@@ -33,8 +35,11 @@ document.getElementById('login').addEventListener('click', async () => {
     console.log(passord," ", brukernavn)
 
     fetch('/brukere', {
-        method: 'GET',
-        headers: {'passord': passord, 'brukernavn': brukernavn}   
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },          
+        body: JSON.stringify({'passord': passord, 'brukernavn': brukernavn})
     })
     .then(response => {return response.json()})
     .then(token => {
